@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vinheta - Jornal de Katorem</title>
+
+<style>
+    body {
+        margin: 0;
+        overflow: hidden;
+        background: black;
+        font-family: Arial, Helvetica, sans-serif;
+        color: white;
+    }
+
+    .container {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(circle at center, #0A1F44 0%, #000000 80%);
+    }
+
+    /* Linhas animadas */
+    .lines {
+        position: absolute;
+        width: 200%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+        animation: moveLines 3s linear infinite;
+        top: 30%;
+    }
+
+    @keyframes moveLines {
+        from { transform: translateX(-100%); }
+        to { transform: translateX(100%); }
+    }
+
+    /* Logo */
+    .logo {
+        font-size: 3em;
+        font-weight: bold;
+        text-transform: uppercase;
+        opacity: 0;
+        transform: scale(0.5);
+        animation: showLogo 3s forwards;
+        animation-delay: 5s;
+        text-align: center;
+    }
+
+    .logo span {
+        display: block;
+        font-size: 0.5em;
+        margin-top: 10px;
+        color: #D4AF37;
+        opacity: 0;
+        animation: showSubtitle 2s forwards;
+        animation-delay: 7s;
+    }
+
+    @keyframes showLogo {
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    @keyframes showSubtitle {
+        to {
+            opacity: 1;
+        }
+    }
+
+    /* Flash de transição */
+    .flash {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: white;
+        opacity: 0;
+        animation: flashEffect 1s;
+        animation-delay: 4s;
+    }
+
+    @keyframes flashEffect {
+        0% { opacity: 0; }
+        50% { opacity: 0.8; }
+        100% { opacity: 0; }
+    }
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="lines"></div>
+    <div class="flash"></div>
+
+    <div class="logo">
+        Jornal de Katorem
+        <span>Começa agora</span>
+    </div>
+</div>
+
+<script>
+    // Simulação de trilha sonora
+    setTimeout(() => {
+        console.log("🎵 Trilha iniciada");
+    }, 0);
+
+    setTimeout(() => {
+        console.log("⚡ Transição principal");
+    }, 4000);
+
+    setTimeout(() => {
+        console.log("📰 Logo exibido");
+    }, 5000);
+</script>
+
+</body>
+</html>

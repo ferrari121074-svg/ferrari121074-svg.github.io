@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Vinheta - Clínica João</title>
+<style>
+body {
+    margin: 0;
+    overflow: hidden;
+    background: linear-gradient(135deg, #eaf6ff, #ffffff);
+    font-family: 'Arial', sans-serif;
+}
+
+.container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.cross {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+}
+
+.cross::before, .cross::after {
+    content: "";
+    position: absolute;
+    background-color: #2a9df4;
+}
+
+.cross::before {
+    width: 30px;
+    height: 100px;
+    left: 35px;
+}
+
+.cross::after {
+    width: 100px;
+    height: 30px;
+    top: 35px;
+}
+
+.slogan {
+    margin-top: 20px;
+    font-size: 22px;
+    color: #2a9df4;
+    opacity: 0;
+    animation: fadeText 2s 2s forwards;
+}
+
+.skin {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: #f4b6a6;
+    margin-top: 30px;
+    opacity: 0;
+    position: relative;
+    animation: showSkin 2s 4s forwards;
+}
+
+.redness {
+    width: 60px;
+    height: 60px;
+    background: rgba(255,0,0,0.5);
+    border-radius: 50%;
+    position: absolute;
+    top: 45px;
+    left: 45px;
+    animation: heal 3s 6s forwards;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #1d6fb8;
+    margin-top: 30px;
+    opacity: 0;
+    animation: showLogo 2s 8s forwards;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+@keyframes fadeText {
+    to { opacity: 1; }
+}
+
+@keyframes showSkin {
+    to { opacity: 1; }
+}
+
+@keyframes heal {
+    0% { background: rgba(255,0,0,0.5); }
+    100% { background: rgba(255,0,0,0); }
+}
+
+@keyframes showLogo {
+    to { opacity: 1; transform: scale(1.1); }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="cross"></div>
+    <div class="slogan">Cuidar é a nossa especialidade</div>
+    <div class="skin">
+        <div class="redness"></div>
+    </div>
+    <div class="logo">CLÍNICA JOÃO</div>
+</div>
+
+<script>
+// Som simples opcional (bip suave)
+setTimeout(() => {
+    const audio = new Audio("https://www.soundjay.com/buttons/sounds/button-3.mp3");
+    audio.volume = 0.2;
+    audio.play();
+}, 8000);
+</script>
+
+</body>
+</html>

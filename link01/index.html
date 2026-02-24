@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Padaria Sabor da Vila</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    background:black;
+    overflow:hidden;
+    font-family:'Montserrat',sans-serif;
+    color:white;
+}
+
+#start{
+    position:absolute;
+    width:100%;
+    height:100vh;
+    background:black;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    z-index:10;
+    font-size:1.5rem;
+    letter-spacing:2px;
+}
+
+.scene{
+    position:absolute;
+    width:100%;
+    height:100vh;
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    transition:opacity 1.5s ease, transform 6s ease;
+    opacity:0;
+}
+
+.scene.active{
+    opacity:1;
+    transform:scale(1.05);
+}
+
+.overlay{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.45);
+}
+
+.content{
+    position:relative;
+    z-index:2;
+    max-width:800px;
+    padding:20px;
+    animation:fadeText 2s ease forwards;
+}
+
+h1{
+    font-family:'Playfair Display',serif;
+    font-size:3rem;
+    margin-bottom:20px;
+}
+
+p{
+    font-size:1.2rem;
+    font-weight:300;
+}
+
+@keyframes fadeText{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+#emotionBar{
+    position:fixed;
+    bottom:0;
+    left:0;
+    height:6px;
+    background:linear-gradient(90deg,#d4af37,#ff4500);
+    width:0%;
+    transition:width 4s ease;
+}
+</style>
+</head>
+<body>
+
+<div id="start">CLIQUE PARA COMEÇAR 🍞</div>
+
+<div id="emotionBar"></div>
+
+<audio id="music" loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/10/25/audio_946f0a5f54.mp3?filename=cinematic-piano-ambient-125566.mp3">
+</audio>
+
+<audio id="bell">
+<source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_c8b39e3f41.mp3?filename=door-bell-1-4641.mp3">
+</audio>
+
+<script>
+const scenesData = [
+{
+img:"https://images.unsplash.com/photo-1509440159596-0249088772ff",
+title:"Antes do amanhecer...",
+text:"A paixão já está no forno.",
+emotion:25
+},
+{
+img:"https://images.unsplash.com/photo-1511920170033-f8396924c348",
+title:"Tradição",
+text:"Não é só receita. É reconhecimento.",
+emotion:25,
+sound:"bell"
+},
+{
+img:"https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
+title:"Momentos",
+text:"Cada sorriso é um ingrediente secreto.",
+emotion:25
+},
+{
+img:"https://images.unsplash.com/photo-1549931319-a545dcf3bc73",
+title:"Padaria Sabor da Vila",
+text:"O sabor que aproxima.",
+emotion:25
+}
+];
+
+let current=0;
+let totalEmotion=0;
+const music=document.getElementById("music");
+const bell=document.getElementById("bell");
+
+function createScene(data){
+const scene=document.createElement("div");
+scene.className="scene";
+scene.style.backgroundImage=`url(${data.img})`;
+
+scene.innerHTML=`
+<div class="overlay"></div>
+<div class="content">
+<h1>${data.title}</h1>
+<p>${data.text}</p>
+</div>
+`;
+
+document.body.appendChild(scene);
+
+setTimeout(()=>{
+scene.classList.add("active");
+},100);
+
+if(data.sound){
+bell.play();
+}
+
+totalEmotion+=data.emotion;
+document.getElementById("emotionBar").style.width=totalEmotion+"%";
+
+setTimeout(()=>{
+scene.classList.remove("active");
+setTimeout(()=>{
+scene.remove();
+current++;
+if(current<scenesData.length){
+createScene(scenesData[current]);
+}
+},1500);
+},8000);
+}
+
+document.getElementById("start").addEventListener("click",()=>{
+document.getElementById("start").style.display="none";
+music.volume=0.5;
+music.play();
+createScene(scenesData[current]);
+});
+</script>
+
+</body>
+</html>
